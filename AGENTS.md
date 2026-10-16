@@ -15,3 +15,4 @@
 - Serve original media through asset pointer imports and retain the original palette through semantic CSS tokens, so migration does not redesign the source website.
 
 - Site images, logo and hero video are real files in src/assets imported directly (bundled by Vite), not CDN pointers, so they work on any host (Netlify, Hostinger).
+- Netlify deploys use netlify.toml (NITRO_PRESET=netlify, publish dist); keep it so external hosting builds succeed.

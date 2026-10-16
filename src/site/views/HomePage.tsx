@@ -1,6 +1,5 @@
 import giftingVideoWebmSrc from "@/assets/kriora-gifting-background.webm";
 import giftingVideoMp4Src from "@/assets/kriora-gifting-background.mp4";
-import sourceImage0Src from "@/assets/desk_essentials_suite_1791806073821.jpg";
 import { Button } from "@/components/ui/button";
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigation } from "../context/NavigationContext";
@@ -35,7 +34,6 @@ import {
 } from "lucide-react";
 const giftingVideoWebm = { url: giftingVideoWebmSrc };
 const giftingVideoMp4 = { url: giftingVideoMp4Src };
-const sourceImage0 = { url: sourceImage0Src };
 
 interface ClientReview {
   id: string;
@@ -375,7 +373,6 @@ export const HomePage: React.FC = () => {
       <section className="home-hero relative pt-8 pb-8 sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-32 overflow-hidden border-b border-source-eae4d6">
         <video
           ref={heroVideoRef}
-          poster={sourceImage0.url}
           autoPlay
           muted
           loop
