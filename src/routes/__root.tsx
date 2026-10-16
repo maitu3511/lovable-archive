@@ -12,6 +12,11 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { NavigationProvider } from "@/site/context/NavigationContext";
+import { Navbar } from "@/site/components/Navbar";
+import { Footer } from "@/site/components/Footer";
+import { FloatingWhatsApp } from "@/site/components/FloatingWhatsApp";
+import { BulkEnquiryModal } from "@/site/components/BulkEnquiryModal";
 
 function NotFoundComponent() {
   return (
@@ -78,21 +83,57 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "KRIORA — Premium B2B Corporate Gifting & Handcrafted Keepsakes" },
+      {
+        name: "description",
+        content:
+          "Discover thoughtfully curated corporate gifts, employee welcome kits, festive hampers and logo-engraved keepsakes by KRIORA. Handcrafted in India.",
+      },
+      {
+        name: "keywords",
+        content:
+          "corporate gifting, B2B gifts India, employee welcome kits, festive corporate gifts, personalized wooden gifts, luxury hampers, Namrata Adhvaryu",
+      },
+      { name: "author", content: "KRIORA (Founder: Namrata Adhvaryu)" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { name: "theme-color", content: "#c94a59" },
+      { property: "og:site_name", content: "KRIORA — B2B Corporate Gifting" },
+      {
+        property: "og:title",
+        content: "KRIORA — Premium B2B Corporate Gifting & Handcrafted Keepsakes",
+      },
+      {
+        property: "og:description",
+        content:
+          "Discover thoughtfully curated corporate gifts, employee welcome kits, festive hampers and logo-engraved keepsakes by KRIORA. Handcrafted in India.",
+      },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/images/hero_corporate.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      {
+        name: "twitter:title",
+        content: "KRIORA — Premium B2B Corporate Gifting",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Curated corporate gifts, employee onboarding kits & festive hampers handcrafted with wit, whimsy and wonder.",
+      },
+      { name: "twitter:image", content: "/images/hero_corporate.jpg" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Finger+Paint&family=Nunito+Sans:ital,opsz,wght@0,6..12,300..900;1,6..12,300..900&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "canonical", href: "https://kriora.in" },
     ],
   }),
   shellComponent: RootShell,
@@ -117,11 +158,104 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    // Scroll to top on navigation so entrance animations trigger properly
+    window.scrollTo({ top: 0, behavior: "instant" });
+
+    let observer: IntersectionObserver | null = null;
+
+    const checkAndObserve = () => {
+      const elements = document.querySelectorAll<HTMLElement>(
+        ".reveal-on-scroll:not(.is-revealed)",
+      );
+      if (!elements.length) return;
+
+      if (!observer) {
+        observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-revealed");
+                delete (entry.target as HTMLElement).dataset.revealing;
+                observer?.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.05, rootMargin: "0px 0px -40px 0px" },
+        );
+      }
+
+      let inViewIndex = 0;
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        // If element is already in initial viewport, stagger reveal so animation is smoothly visible
+        if (rect.top <= window.innerHeight * 0.95 && rect.bottom >= 0) {
+          if (el.dataset.revealing) return;
+          el.dataset.revealing = "true";
+          const delayMs = Math.min(inViewIndex * 50, 350);
+          inViewIndex++;
+          setTimeout(() => {
+            el.classList.add("is-revealed");
+            delete el.dataset.revealing;
+          }, delayMs);
+        } else {
+          observer?.observe(el);
+        }
+      });
+    };
+
+    // Give DOM a frame to compute initial transform styles before revealing in-view elements
+    const rafId = requestAnimationFrame(() => {
+      checkAndObserve();
+    });
+
+    const t1 = setTimeout(checkAndObserve, 80);
+    const t2 = setTimeout(checkAndObserve, 250);
+
+    // Watch for dynamic DOM additions (e.g. tabs switching or products loading)
+    const mutationObserver = new MutationObserver(() => {
+      checkAndObserve();
+    });
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+    // Safety fallback: ensure all elements in view or near view are revealed
+    const safetyTimer = setTimeout(() => {
+      document
+        .querySelectorAll<HTMLElement>(".reveal-on-scroll:not(.is-revealed)")
+        .forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= window.innerHeight * 1.1) {
+            el.classList.add("is-revealed");
+            delete el.dataset.revealing;
+          }
+        });
+    }, 1200);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(safetyTimer);
+      observer?.disconnect();
+      mutationObserver.disconnect();
+    };
+  }, [router.state.location.pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <NavigationProvider>
+        <div className="flex flex-col min-h-screen bg-source-faf7ee text-source-1b263b">
+          <Navbar />
+          <main className="flex-grow">
+            <Outlet />
+          </main>
+          <Footer />
+          <FloatingWhatsApp />
+          <BulkEnquiryModal />
+        </div>
+      </NavigationProvider>
     </QueryClientProvider>
   );
 }

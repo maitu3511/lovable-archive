@@ -1,0 +1,265 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Finger Paint", cursive, sans-serif;
+  --font-body: "Nunito Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --color-ivory: #faf7ee;
+  --color-linen: #f4f0e4;
+  --color-navy: #1b263b;
+  --color-navy-dark: #131c2b;
+  --color-slate-navy: #243247;
+  --color-coral: #c94a59;
+  --color-coral-dark: #b33947;
+  --color-periwinkle: #b4b9df;
+  --color-periwinkle-light: #eceefb;
+  --color-periwinkle-soft: #dfe3f7;
+  --color-gold: #d4a347;
+  --color-slate-muted: #5a6b7c;
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  font-family:
+    "Nunito Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  background-color: #faf7ee;
+  color: #1b263b;
+}
+
+.font-heading {
+  font-family: "Finger Paint", cursive, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  text-align: center;
+}
+
+.font-body {
+  font-family:
+    "Nunito Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+/* Warm Coral Gradient Accent */
+.text-coral-gradient {
+  background: linear-gradient(135deg, #1b263b 0%, #c94a59 60%, #d4a347 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtle Warm Border Sheen */
+.border-coral-subtle {
+  border-color: rgba(201, 74, 89, 0.25);
+}
+
+.border-periwinkle-subtle {
+  border-color: rgba(180, 185, 223, 0.5);
+}
+
+/* Proper smooth animations across the website (left se right, upar se niche) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes kriora-progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Scroll-triggered reveal animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-from-top {
+  transform: translateY(-36px);
+}
+
+.reveal-from-bottom {
+  transform: translateY(36px);
+}
+
+.reveal-from-left {
+  transform: translateX(-48px);
+}
+
+.reveal-from-right {
+  transform: translateX(48px);
+}
+
+.reveal-zoom-in {
+  transform: scale(0.92);
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+  transition-delay: 100ms;
+}
+.delay-200 {
+  animation-delay: 200ms;
+  transition-delay: 200ms;
+}
+.delay-300 {
+  animation-delay: 300ms;
+  transition-delay: 300ms;
+}
+.delay-400 {
+  animation-delay: 400ms;
+  transition-delay: 400ms;
+}
+.delay-500 {
+  animation-delay: 500ms;
+  transition-delay: 500ms;
+}
+
+/* Scrollbar in soft palette */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f0e4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b4b9df;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c94a59;
+}
+
+/* Auto-Scrolling Marquee for Client Reviews */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-reviews-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 38s linear infinite;
+}
+
+.animate-reviews-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Hide scrollbar for clean scroll areas */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Slow zoom in / zoom out on every photo (video-like Ken Burns effect) */
+@keyframes kriora-kenburns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.12);
+  }
+}
+
+main img,
+.kb-hero {
+  animation: kriora-kenburns 10s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.kb-hero {
+  animation-duration: 14s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main img,
+  .kb-hero {
+    animation: none;
+  }
+}

@@ -1,24 +1,47 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { HomePage } from "@/site/views/HomePage";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "KRIORA — Premium B2B Corporate Gifting & Handcrafted Keepsakes" },
+      {
+        name: "description",
+        content:
+          "Discover thoughtfully curated corporate gifts, employee welcome kits, festive hampers and logo-engraved keepsakes by KRIORA. Handcrafted in India.",
+      },
+      {
+        name: "keywords",
+        content:
+          "corporate gifting, B2B gifts India, employee welcome kit, corporate festive hampers, personalized wooden gifts, Namrata Adhvaryu, luxury corporate hampers",
+      },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { property: "og:site_name", content: "KRIORA — B2B Corporate Gifting" },
+      {
+        property: "og:title",
+        content: "KRIORA — Premium B2B Corporate Gifting & Handcrafted Keepsakes",
+      },
+      {
+        property: "og:description",
+        content:
+          "Discover thoughtfully curated corporate gifts, employee welcome kits, festive hampers and logo-engraved keepsakes by KRIORA. Handcrafted in India.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://kriora.in" },
+      { property: "og:image", content: "/images/hero_corporate.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:title",
+        content: "KRIORA — Premium B2B Corporate Gifting",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Curated corporate gifts, employee onboarding kits & festive hampers handcrafted with wit, whimsy and wonder.",
+      },
+      { name: "twitter:image", content: "/images/hero_corporate.jpg" },
+    ],
+    links: [{ rel: "canonical", href: "https://kriora.in" }],
+  }),
+  component: HomePage,
 });
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}

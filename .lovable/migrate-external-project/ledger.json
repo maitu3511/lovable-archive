@@ -1,0 +1,56 @@
+{
+  "source": "code-archive",
+  "capabilities": [
+    {
+      "capability": "code and routes",
+      "source": "uploaded KRIORA React website",
+      "outcome": "migrate with original presentation preserved",
+      "status": "verified",
+      "next_action": null
+    },
+    {
+      "capability": "index.html",
+      "source": "kriora/index.html",
+      "outcome": "preserve byte-for-byte",
+      "status": "verified",
+      "next_action": null
+    },
+    {
+      "capability": "images",
+      "source": "bundled public/images",
+      "outcome": "preserve via asset hosting",
+      "status": "verified",
+      "next_action": null
+    },
+    {
+      "capability": "home hero video",
+      "source": "requested change",
+      "outcome": "center original copy and replace showcase with video",
+      "status": "verified",
+      "next_action": null
+    },
+    {
+      "capability": "data, auth, providers and forms",
+      "source": "source inspection",
+      "outcome": "No database, authentication, server APIs, storage services, callbacks or schedules. Static catalog and WhatsApp enquiry preserved. Original marketplace URLs retained.",
+      "status": "verified",
+      "next_action": "Marketplace destinations are supplied source URLs; listing availability not verified."
+    },
+    {
+      "capability": "verification",
+      "source": "live preview",
+      "outcome": "verify routes, enquiry and video",
+      "status": "verified",
+      "next_action": null
+    }
+  ],
+  "verification": {
+    "index_html": "byte-for-byte identical to source",
+    "pages": "all named routes and representative category/product direct links passed",
+    "hero": "no image; centered original text; video playing muted in loop, 1600px width",
+    "enquiry": "filled test inputs; WhatsApp recipient and encoded payload verified without sending message",
+    "runtime": "no page errors",
+    "tests": "routing test passed",
+    "cutover": "not published; no external endpoint changes detected"
+  }
+}
