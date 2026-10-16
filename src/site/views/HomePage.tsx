@@ -1,6 +1,5 @@
 import giftingVideoWebmSrc from "@/assets/kriora-gifting-background.webm";
 import giftingVideoMp4Src from "@/assets/kriora-gifting-background.mp4";
-import sourceImage0Src from "@/assets/desk_essentials_suite_1791806073821.jpg";
 import { Button } from "@/components/ui/button";
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigation } from "../context/NavigationContext";
@@ -35,7 +34,6 @@ import {
 } from "lucide-react";
 const giftingVideoWebm = { url: giftingVideoWebmSrc };
 const giftingVideoMp4 = { url: giftingVideoMp4Src };
-const sourceImage0 = { url: sourceImage0Src };
 
 interface ClientReview {
   id: string;
