@@ -10,33 +10,167 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as B2bEnquiryRouteImport } from './routes/b2b-enquiry'
+import { Route as BulkEnquiryRouteImport } from './routes/bulk-enquiry'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CorporateGiftingRouteImport } from './routes/corporate-gifting'
+import { Route as CustomisationRouteImport } from './routes/customisation'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as ProductIdRouteImport } from './routes/product.$id'
+import { Route as ProductsIndexRouteImport } from './routes/products.index'
+import { Route as ProductsCategoryRouteImport } from './routes/products.$category'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const B2bEnquiryRoute = B2bEnquiryRouteImport.update({
+  id: '/b2b-enquiry',
+  path: '/b2b-enquiry',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BulkEnquiryRoute = BulkEnquiryRouteImport.update({
+  id: '/bulk-enquiry',
+  path: '/bulk-enquiry',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CorporateGiftingRoute = CorporateGiftingRouteImport.update({
+  id: '/corporate-gifting',
+  path: '/corporate-gifting',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomisationRoute = CustomisationRouteImport.update({
+  id: '/customisation',
+  path: '/customisation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductIdRoute = ProductIdRouteImport.update({
+  id: '/product/$id',
+  path: '/product/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsIndexRoute = ProductsIndexRouteImport.update({
+  id: '/products/',
+  path: '/products/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsCategoryRoute = ProductsCategoryRouteImport.update({
+  id: '/products/$category',
+  path: '/products/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/b2b-enquiry': typeof B2bEnquiryRoute
+  '/bulk-enquiry': typeof BulkEnquiryRoute
+  '/contact': typeof ContactRoute
+  '/corporate-gifting': typeof CorporateGiftingRoute
+  '/customisation': typeof CustomisationRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/product/$id': typeof ProductIdRoute
+  '/products/$category': typeof ProductsCategoryRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/b2b-enquiry': typeof B2bEnquiryRoute
+  '/bulk-enquiry': typeof BulkEnquiryRoute
+  '/contact': typeof ContactRoute
+  '/corporate-gifting': typeof CorporateGiftingRoute
+  '/customisation': typeof CustomisationRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/product/$id': typeof ProductIdRoute
+  '/products/$category': typeof ProductsCategoryRoute
+  '/products': typeof ProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/b2b-enquiry': typeof B2bEnquiryRoute
+  '/bulk-enquiry': typeof BulkEnquiryRoute
+  '/contact': typeof ContactRoute
+  '/corporate-gifting': typeof CorporateGiftingRoute
+  '/customisation': typeof CustomisationRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/product/$id': typeof ProductIdRoute
+  '/products/$category': typeof ProductsCategoryRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/b2b-enquiry'
+    | '/bulk-enquiry'
+    | '/contact'
+    | '/corporate-gifting'
+    | '/customisation'
+    | '/how-it-works'
+    | '/product/$id'
+    | '/products/$category'
+    | '/products/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/b2b-enquiry'
+    | '/bulk-enquiry'
+    | '/contact'
+    | '/corporate-gifting'
+    | '/customisation'
+    | '/how-it-works'
+    | '/product/$id'
+    | '/products/$category'
+    | '/products'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/b2b-enquiry'
+    | '/bulk-enquiry'
+    | '/contact'
+    | '/corporate-gifting'
+    | '/customisation'
+    | '/how-it-works'
+    | '/product/$id'
+    | '/products/$category'
+    | '/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  B2bEnquiryRoute: typeof B2bEnquiryRoute
+  BulkEnquiryRoute: typeof BulkEnquiryRoute
+  ContactRoute: typeof ContactRoute
+  CorporateGiftingRoute: typeof CorporateGiftingRoute
+  CustomisationRoute: typeof CustomisationRoute
+  HowItWorksRoute: typeof HowItWorksRoute
+  ProductIdRoute: typeof ProductIdRoute
+  ProductsCategoryRoute: typeof ProductsCategoryRoute
+  ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +182,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/b2b-enquiry': {
+      id: '/b2b-enquiry'
+      path: '/b2b-enquiry'
+      fullPath: '/b2b-enquiry'
+      preLoaderRoute: typeof B2bEnquiryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bulk-enquiry': {
+      id: '/bulk-enquiry'
+      path: '/bulk-enquiry'
+      fullPath: '/bulk-enquiry'
+      preLoaderRoute: typeof BulkEnquiryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/corporate-gifting': {
+      id: '/corporate-gifting'
+      path: '/corporate-gifting'
+      fullPath: '/corporate-gifting'
+      preLoaderRoute: typeof CorporateGiftingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customisation': {
+      id: '/customisation'
+      path: '/customisation'
+      fullPath: '/customisation'
+      preLoaderRoute: typeof CustomisationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product/$id': {
+      id: '/product/$id'
+      path: '/product/$id'
+      fullPath: '/product/$id'
+      preLoaderRoute: typeof ProductIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/': {
+      id: '/products/'
+      path: '/products'
+      fullPath: '/products/'
+      preLoaderRoute: typeof ProductsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/$category': {
+      id: '/products/$category'
+      path: '/products/$category'
+      fullPath: '/products/$category'
+      preLoaderRoute: typeof ProductsCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  B2bEnquiryRoute: B2bEnquiryRoute,
+  BulkEnquiryRoute: BulkEnquiryRoute,
+  ContactRoute: ContactRoute,
+  CorporateGiftingRoute: CorporateGiftingRoute,
+  CustomisationRoute: CustomisationRoute,
+  HowItWorksRoute: HowItWorksRoute,
+  ProductIdRoute: ProductIdRoute,
+  ProductsCategoryRoute: ProductsCategoryRoute,
+  ProductsIndexRoute: ProductsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
