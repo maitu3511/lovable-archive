@@ -193,7 +193,7 @@ function RootComponent() {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
                 entry.target.classList.add("is-revealed");
-                delete (entry.target as HTMLElement).dataset.revealing;
+                delete (entry.target as HTMLElement).dataset["revealing"];
                 observer?.unobserve(entry.target);
               }
             });
@@ -207,13 +207,13 @@ function RootComponent() {
         const rect = el.getBoundingClientRect();
         // If element is already in initial viewport, stagger reveal so animation is smoothly visible
         if (rect.top <= window.innerHeight * 0.95 && rect.bottom >= 0) {
-          if (el.dataset.revealing) return;
-          el.dataset.revealing = "true";
+          if (el.dataset["revealing"]) return;
+          el.dataset["revealing"] = "true";
           const delayMs = Math.min(inViewIndex * 50, 350);
           inViewIndex++;
           setTimeout(() => {
             el.classList.add("is-revealed");
-            delete el.dataset.revealing;
+            delete el.dataset["revealing"];
           }, delayMs);
         } else {
           observer?.observe(el);
@@ -243,7 +243,7 @@ function RootComponent() {
           const rect = el.getBoundingClientRect();
           if (rect.top <= window.innerHeight * 1.1) {
             el.classList.add("is-revealed");
-            delete el.dataset.revealing;
+            delete el.dataset["revealing"];
           }
         });
     }, 1200);
