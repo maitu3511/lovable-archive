@@ -156,7 +156,22 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+// Warm every site photo into the browser cache right after first paint,
+// so pictures on other pages open instantly.
+const siteImageUrls = Object.values(
+  import.meta.glob("../assets/*.{jpg,jpeg,png,webp}", { eager: true, query: "?url", import: "default" }),
+) as string[];
+
+function useWarmSiteImages() {
+  useEffect(() => {
+    const start = () => siteImageUrls.forEach((src) => { const i = new Image(); i.decoding = "async"; i.src = src; });
+    const t = setTimeout(start, 600);
+    return () => clearTimeout(t);
+  }, []);
+}
+
 function RootComponent() {
+  useWarmSiteImages();
   const { queryClient } = Route.useRouteContext();
   const router = useRouter();
 
@@ -178,7 +193,7 @@ function RootComponent() {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
                 entry.target.classList.add("is-revealed");
-                delete (entry.target as HTMLElement).dataset.revealing;
+                delete (entry.target as HTMLElement).dataset["revealing"];
                 observer?.unobserve(entry.target);
               }
             });
@@ -192,13 +207,13 @@ function RootComponent() {
         const rect = el.getBoundingClientRect();
         // If element is already in initial viewport, stagger reveal so animation is smoothly visible
         if (rect.top <= window.innerHeight * 0.95 && rect.bottom >= 0) {
-          if (el.dataset.revealing) return;
-          el.dataset.revealing = "true";
+          if (el.dataset["revealing"]) return;
+          el.dataset["revealing"] = "true";
           const delayMs = Math.min(inViewIndex * 50, 350);
           inViewIndex++;
           setTimeout(() => {
             el.classList.add("is-revealed");
-            delete el.dataset.revealing;
+            delete el.dataset["revealing"];
           }, delayMs);
         } else {
           observer?.observe(el);
@@ -228,7 +243,7 @@ function RootComponent() {
           const rect = el.getBoundingClientRect();
           if (rect.top <= window.innerHeight * 1.1) {
             el.classList.add("is-revealed");
-            delete el.dataset.revealing;
+            delete el.dataset["revealing"];
           }
         });
     }, 1200);

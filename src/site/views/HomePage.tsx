@@ -520,7 +520,7 @@ export const HomePage: React.FC = () => {
                       alt={solution.title}
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
+                      loading="eager"
                     />
                   </div>
 
@@ -628,7 +628,7 @@ export const HomePage: React.FC = () => {
                         alt={cat.title}
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
+                        loading="eager"
                       />
                       <div className="absolute top-3 left-3">
                         <span className="text-[11px] font-bold text-white bg-source-c94a59 px-2.5 py-0.5 rounded-md shadow-xs uppercase tracking-wider">
