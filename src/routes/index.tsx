@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HomePage } from "@/site/views/HomePage";
+import heroVideoMp4 from "@/assets/kriora-gifting-background.mp4";
+import heroVideoWebm from "@/assets/kriora-gifting-background.webm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -41,7 +43,11 @@ export const Route = createFileRoute("/")({
       },
       { name: "twitter:image", content: "/images/hero_corporate.jpg" },
     ],
-    links: [{ rel: "canonical", href: "https://kriora.in" }],
+    links: [
+      { rel: "canonical", href: "https://kriora.in" },
+      { rel: "preload", as: "video", href: heroVideoMp4, type: "video/mp4" },
+      { rel: "preload", as: "video", href: heroVideoWebm, type: "video/webm" },
+    ],
   }),
   component: HomePage,
 });

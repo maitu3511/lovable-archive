@@ -156,7 +156,22 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+// Warm every site photo into the browser cache right after first paint,
+// so pictures on other pages open instantly.
+const siteImageUrls = Object.values(
+  import.meta.glob("../assets/*.{jpg,jpeg,png,webp}", { eager: true, query: "?url", import: "default" }),
+) as string[];
+
+function useWarmSiteImages() {
+  useEffect(() => {
+    const start = () => siteImageUrls.forEach((src) => { const i = new Image(); i.decoding = "async"; i.src = src; });
+    const t = setTimeout(start, 600);
+    return () => clearTimeout(t);
+  }, []);
+}
+
 function RootComponent() {
+  useWarmSiteImages();
   const { queryClient } = Route.useRouteContext();
   const router = useRouter();
 

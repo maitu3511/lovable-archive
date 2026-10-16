@@ -129,7 +129,7 @@ export const CorporateGiftingPage: React.FC = () => {
                       alt={sol.title}
                       referrerPolicy="no-referrer"
                       className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
+                      loading="eager"
                     />
                     <div className="p-4 bg-white border-t border-source-f0ebe1 flex items-center justify-between text-xs">
                       <span className="text-source-c94a59 font-bold">{sol.title}</span>
