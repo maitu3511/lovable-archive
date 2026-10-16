@@ -375,7 +375,6 @@ export const HomePage: React.FC = () => {
       <section className="home-hero relative pt-8 pb-8 sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-32 overflow-hidden border-b border-source-eae4d6">
         <video
           ref={heroVideoRef}
-          poster={sourceImage0.url}
           autoPlay
           muted
           loop
